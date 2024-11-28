@@ -20,10 +20,10 @@ public class JWTUtil {
 	// 대칭키: 토큰을 검사할 때 사용
 	private String secretKey = "zerock12345678";
 
-	private long expire = 1;	
+//	private long expire = 1;	
 	// 토큰 유효기간: 1month
 	// 토큰을 발급한 시점부터 1달까지 사용할 수 있음
-//	private long expire = 60 * 24 * 30;
+	private long expire = 60 * 24 * 30;
 	// 하루               //분 //시 //일
 //	private long expire = 60 * 24 * 1;
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,16 @@ public class BoardController {
 	@Autowired
     BoardService service;
 
-	//localhost:8080/board/register + 바디(폼데이터)
+	// localhost:8080/board/register + 바디(폼데이터)
+	// 시큐리티 컨테이너에서 인증객체를 꺼내어 사용
+	// 로그인한 사용자의 아이디를 작성자로 입력할 것
 	@PostMapping("/register")
-	public ResponseEntity<Integer> register(BoardDTO dto) {
-		dto.setWriter("user"); // 임시 아이디
+	public ResponseEntity<Integer> register(BoardDTO dto, Principal principal) {
+		
+		System.out.println("인증객체: " + principal);
+		
+//		dto.setWriter("admin"); // 임시 아이디
+		dto.setWriter(principal.getName());
 		int no = service.register(dto);
 		return new ResponseEntity<>(no, HttpStatus.CREATED); //201성공코드와 새로운 글번호를 반환한다
 	}
